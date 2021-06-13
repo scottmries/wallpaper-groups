@@ -69,12 +69,17 @@ html {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: relative;
 }
 
-.title {
+h1 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
   font-family:
     'Quicksand',
     'Source Sans Pro',
@@ -90,6 +95,8 @@ html {
   font-size: 100px;
   color: #35495e;
   letter-spacing: 1px;
+  background-color:#666;
+  z-index:1000;
 }
 
 .subtitle {
@@ -102,5 +109,53 @@ html {
 
 .links {
   padding-top: 15px;
+}
+
+.rotate-0 {
+  transform: rotate(0);
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.rotate-270 {
+  transform: rotate(270deg);
+}
+
+.rect, .square {
+  background-size: cover;
+  background-position: center;
+  @apply flex justify-center overflow-hidden;
+}
+
+.rect {
+  width: 120px;
+  height: 60px;
+}
+
+.square {
+  width: 60px;
+  height: 60px;
+}
+
+.wallpaper {
+  @apply flex w-full justify-center;
+}
+
+.glide-reflect {
+  transform: scaleX(-1) translateY(-30px);
+}
+
+.top-half {
+  clip-path: inset(0 0 50% 0);
+}
+
+.bottom-half {
+  clip-path: inset(50% 0 0 0);
 }
 </style>
