@@ -24,6 +24,12 @@ html {
   box-sizing: border-box;
 }
 
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
 *,
 *::before,
 *::after {
@@ -127,7 +133,7 @@ h1 {
   transform: rotate(270deg);
 }
 
-.rect, .square {
+.rect, .square, .hexagon {
   background-size: cover;
   background-position: center;
   @apply flex justify-center overflow-hidden;
@@ -143,12 +149,24 @@ h1 {
   height: 60px;
 }
 
+.hexagon {
+  clip-path: polygon(0px 30px, 15px 4.02px, 45px 4.02px, 60px 30px, 45px 55.98px, 15px 55.98px);
+  width: 60px;
+  height: 55.98px;
+  transform-origin: 30px 30px;
+}
+
 .wallpaper {
-  @apply flex w-full justify-center;
+  @apply flex justify-center;
+  clip-path: polygon(0 0, 0 calc(100% - 60px), calc(100% - 60px) calc(100% - 60px), calc(100% - 60px) 0);
 }
 
 .glide-reflect {
   transform: scaleX(-1) translateY(-30px);
+}
+
+.glide-reflect.rotate-180 {
+  transform: scaleX(-1) translateY(-30px) rotate(180deg) ;
 }
 
 .top-half {
@@ -157,5 +175,23 @@ h1 {
 
 .bottom-half {
   clip-path: inset(50% 0 0 0);
+}
+
+a {
+  color: orange;
+  text-decoration: underline;
+}
+a:hover {
+  text-decoration: none;
+}
+a.disabled {
+  pointer-events: none;
+  text-decoration: line-through;
+}
+.bg-orange {
+  background-color: orange;
+}
+.bg-orange a {
+  color:black;
 }
 </style>

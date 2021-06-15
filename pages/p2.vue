@@ -2,9 +2,9 @@
   <div class="container">
     <h1>p2 (2222)</h1>
     <div class="wallpaper">
-      <div v-for="i in 12" :key="i">
+      <div v-for="i in 50" :key="i">
         <div
-            v-for="j in 12"
+            v-for="j in 50"
             :key="j"
             :class="rotationClass(i)"
             class="square"
