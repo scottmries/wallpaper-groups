@@ -133,7 +133,7 @@ h1 {
   transform: rotate(270deg);
 }
 
-.rect, .square, .hexagon {
+.rect, .square, .hexagon, .isosceles-120 {
   background-size: cover;
   background-position: center;
   @apply flex justify-center overflow-hidden;
@@ -154,6 +154,13 @@ h1 {
   width: 60px;
   height: 55.98px;
   transform-origin: 30px 30px;
+}
+
+.isosceles-120 {
+  width: 60px;
+  height: 17.32px;
+  clip-path: polygon(0 0, 60px 0, 30px 17.32px);
+  transform-origin: 30px 17.32px;
 }
 
 .wallpaper {

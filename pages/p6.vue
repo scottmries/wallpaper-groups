@@ -1,14 +1,13 @@
 <template>
   <div class="container">
     <!-- <h1>p6 (636)</h1> -->
-    <div class="wallpaper">
-      <div v-for="i in 50" :key="i">
+    <div class="wallpaper relative">
+      <div v-for="i in 6" :key="i" class="absolute">
         <div
-            v-for="j in 50"
+            v-for="j in 1"
             :key="j"
-            :style="'transform: translate(' + translateClass(i, j) + ') rotate(' + rotationClass(i, j) + ')'"
-            class="hexagon"
-            style="background-image: url('https://www.marketplace.org/wp-content/uploads/2019/01/GettyImages-1071520964.jpg?w=600')">
+            :style="`background-image: url('${image}'); transform: translate(${translateClass(i, j)}) rotate(${rotationClass(i, j)})`"
+            class="isosceles-120">
           </div>
       </div>
     </div>
@@ -21,17 +20,37 @@ export default {
       scale: 60
     }
   },
+  computed: {
+    image () {
+      return this.$store.state.image
+    }
+  },
   methods: {
-    clipPath () {
-      return '0px 30px, 15px 4.02px, 45px 4.02px, 60px 30px, 45px 55.98px, 15px 55.98px'
-    },
     rotationClass (i, j) {
-      return ((i + j) % 6) * 60 + 'deg'
+      return ((i + j) % 6) * -60 + 'deg'
     },
     translateClass (i, j) {
-      const x = -i * 15 + 'px'
-      let y = -j * 8.04
-      y -= (i % 12) * 24.1
+      const x = 0
+      let y = 0
+      switch (j % 6) {
+        case 1:
+          y = -51
+          break
+        case 2:
+          y = -34.64
+          break
+        case 3:
+          y = -87.32
+          break
+        case 4:
+          y = -70
+          break
+        case 5:
+          y = -120
+          break
+      }
+      // let y = (j % 6) * 51.96
+      // y -= i * 0
       return x + ', ' + y + 'px'
     }
   }

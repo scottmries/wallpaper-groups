@@ -8,7 +8,7 @@
             :key="j"
             :class="rotationClass(i)"
             class="square"
-            style="background-image: url('https://www.marketplace.org/wp-content/uploads/2019/01/GettyImages-1071520964.jpg?w=600')">
+            :style="`background-image: url('${image}')`">
           </div>
       </div>
     </div>
@@ -16,6 +16,11 @@
 </template>
 <script>
 export default {
+  computed: {
+    image () {
+      return this.$store.state.image
+    }
+  },
   methods: {
     rotationClass (i) {
       let degrees = 0

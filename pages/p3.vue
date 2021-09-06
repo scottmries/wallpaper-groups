@@ -6,9 +6,11 @@
         <div
             v-for="j in 50"
             :key="j"
-            :style="'transform: translate(' + translateClass(i, j) + ') rotate(' + rotationClass(i, j) + ')'"
-            class="hexagon"
-            style="background-image: url('https://www.marketplace.org/wp-content/uploads/2019/01/GettyImages-1071520964.jpg?w=600')">
+            :style="`
+              background-image: url('${image}');
+              transform: translate(${translateClass(i, j)}) rotate(${rotationClass(i, j)});
+            `"
+            class="hexagon">
           </div>
       </div>
     </div>
@@ -19,6 +21,11 @@ export default {
   data () {
     return {
       scale: 60
+    }
+  },
+  computed: {
+    image () {
+      return this.$store.state.image
     }
   },
   methods: {
