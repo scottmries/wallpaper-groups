@@ -1,4 +1,9 @@
 export default {
+  mode: 'spa',
+
+  router: {
+    base: '/wallpaper-groups/'
+  },
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
