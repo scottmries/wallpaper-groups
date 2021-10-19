@@ -1,5 +1,5 @@
 export default {
-  mode: 'spa',
+  target: 'static',
 
   router: {
     base: '/wallpaper-groups/'
