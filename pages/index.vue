@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <h1 class="title relative bg-transparent">
-        Wallpaper Groups
+        Wallpaper Groups hi
       </h1>
       <table>
         <tr>
