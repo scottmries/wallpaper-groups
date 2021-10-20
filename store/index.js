@@ -1,7 +1,16 @@
 export const state = () => ({
-  image: '/kitten.jpeg',
+  imageIndex: 1,
   images: [
-    '/gritty.jpeg',
-    '/kitten.jpeg'
-  ]
+    {
+      path: '/gritty.jpeg',
+      width: 600,
+      height: 333
+    },
+    {
+      path: '/kitten.jpeg',
+      width: 424,
+      height: 422
+    }
+  ],
+  scale: 0.1
 })
