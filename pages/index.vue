@@ -85,7 +85,7 @@
           </tr>
           <tr class="bg-orange">
             <td colspan=2><nuxt-link to="cm" class="disabled">cm (*x)</nuxt-link></td>
-            <td><nuxt-link to="pm" class="disabled">pm (**)</nuxt-link></td>
+            <td><nuxt-link to="pm">pm (**)</nuxt-link></td>
             <td><nuxt-link to="pg">pg (xx)</nuxt-link></td>
             <td><nuxt-link to="p1">p1 (o)</nuxt-link></td>
           </tr>

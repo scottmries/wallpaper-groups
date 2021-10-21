@@ -1,17 +1,14 @@
 <template>
-  <div class="container">
-    <!-- <h1>p3 (333)</h1> -->
-    <div class="wallpaper">
-      <div v-for="i in 50" :key="i">
-        <div
-            v-for="j in 50"
-            :key="j"
-            :style="`
-              background-image: url('${image}');
-              transform: translate(${translateClass(i, j)}) rotate(${rotationClass(i, j)});
-            `"
-            class="hexagon">
-          </div>
+  <div>
+    <div class="container">
+      <div class="w-1/2">
+        <h1>p3 (333)</h1>
+      </div>
+      <div class="w-1/2">
+        <div id="source-image-container">
+          <img id="image" ref="image" :src="image.path">
+        </div>
+        <canvas id="canvas" />
       </div>
     </div>
   </div>
@@ -20,34 +17,96 @@
 export default {
   data () {
     return {
-      scale: 60
+      ctx: null
     }
   },
   computed: {
     image () {
-      return this.$store.state.image
+      return this.$store.state.images[this.$store.state.imageIndex]
+    },
+    scale () {
+      return this.$store.state.scale
     }
   },
-  methods: {
-    clipPath () {
-      return '0px 30px, 15px 4.02px, 45px 4.02px, 60px 30px, 45px 55.98px, 15px 55.98px'
-    },
-    rotationClass (i, j) {
-      switch ((i + j) % 3) {
-        case 0:
-          return '0deg'
-        case 1:
-          return '120deg'
-        case 2:
-          return '240deg'
+  mounted () {
+    this.$nextTick(() => {
+      const c = document.getElementById('canvas')
+      const ctx = c.getContext('2d')
+      this.ctx = ctx
+
+      const image = document.getElementById('image')
+
+      image.onload = () => {
+        this.ctx.canvas.width = window.innerWidth
+        this.ctx.canvas.height = window.innerHeight
+
+        const imageWidth = this.image.width * this.scale
+        const imageHeight = this.image.height * this.scale
+
+        const shortSide = (imageWidth > imageHeight ? imageHeight : imageWidth) / 2
+        const rhombusWidth = shortSide * Math.sqrt(3) / 2
+        // const sideLength = shortSide * Math.cos(Math.PI / 3)
+
+        for (let i = 0; i < this.ctx.canvas.width / rhombusWidth; i += 2) {
+          for (let j = 0; j < this.ctx.canvas.height / shortSide; j += 2) {
+            this.ctx.save()
+            this.ctx.translate(i * rhombusWidth, j * shortSide)
+            this.ctx.beginPath()
+            this.ctx.moveTo(shortSide - rhombusWidth, shortSide / 2)
+            this.ctx.lineTo(shortSide, 0)
+            this.ctx.lineTo(shortSide + rhombusWidth, shortSide / 2)
+            this.ctx.lineTo(shortSide, shortSide)
+            this.ctx.closePath()
+            this.ctx.clip()
+            this.ctx.drawImage(image, 0, -shortSide / 2, shortSide * 2, shortSide * 2)
+            this.ctx.restore()
+          }
+        }
+        for (let i = 0; i < this.ctx.canvas.width / rhombusWidth; i += 2) {
+          for (let j = 0; j < this.ctx.canvas.height / shortSide; j += 2) {
+            this.ctx.save()
+            this.ctx.translate(i * rhombusWidth + shortSide, j * shortSide)
+            this.ctx.rotate(-2 * Math.PI / 3)
+            this.ctx.beginPath()
+            this.ctx.moveTo(0, 0)
+            this.ctx.lineTo(rhombusWidth, shortSide / 2)
+            this.ctx.lineTo(0, shortSide)
+            this.ctx.lineTo(-rhombusWidth, shortSide / 2)
+            this.ctx.closePath()
+            this.ctx.clip()
+            this.ctx.drawImage(image, -shortSide, -shortSide / 2, shortSide * 2, shortSide * 2)
+            this.ctx.restore()
+          }
+        }
+        for (let i = 0; i < this.ctx.canvas.width / rhombusWidth; i += 2) {
+          for (let j = 0; j < this.ctx.canvas.height / shortSide; j += 2) {
+            this.ctx.save()
+            this.ctx.translate(i * rhombusWidth + shortSide, j * shortSide)
+            this.ctx.rotate(-4 * Math.PI / 3)
+            this.ctx.beginPath()
+            this.ctx.moveTo(0, 0)
+            this.ctx.lineTo(rhombusWidth, shortSide / 2)
+            this.ctx.lineTo(0, shortSide)
+            this.ctx.lineTo(-rhombusWidth, shortSide / 2)
+            this.ctx.closePath()
+            this.ctx.clip()
+            this.ctx.drawImage(image, -shortSide, -shortSide / 2, shortSide * 2, shortSide * 2)
+            this.ctx.restore()
+          }
+        }
       }
-    },
-    translateClass (i, j) {
-      const x = -i * 15 + 'px'
-      let y = -j * 8.04
-      y -= (i % 6) * 24.3
-      return x + ', ' + y + 'px'
+    })
+  },
+  methods: {
+    drawRectangle () {
+      this.ctx.save()
+      // this.ctx.rotate(Math.PI / 3)
+      this.ctx.beginPath()
+      this.ctx.rect(0, 0, 200, 200)
+      this.ctx.stroke()
+      this.ctx.restore()
     }
   }
+
 }
 </script>

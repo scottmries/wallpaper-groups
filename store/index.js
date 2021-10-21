@@ -12,5 +12,5 @@ export const state = () => ({
       height: 422
     }
   ],
-  scale: 0.1
+  scale: 0.25
 })
